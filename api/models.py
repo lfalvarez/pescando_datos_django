@@ -105,34 +105,37 @@ class Marginacion(models.Model):
     lugar_en_nacional = models.IntegerField()
     lugar_en_estatal = models.IntegerField()
 
-class BeneficiariosDiesel(models.Model):
+
+class BeneficiarioBase(models.Model):
     ano = models.CharField(max_length=255, blank=True)
     beneficiario = models.CharField(max_length=255, blank=True)
     rfc = models.CharField(max_length=255, blank=True)
     rnpa = models.CharField(max_length=255, blank=True)
+    rnpa_emb = models.CharField(max_length=255, blank=True)
     estado  = models.CharField(max_length=255, blank=True)
     municipio  = models.CharField(max_length=255, blank=True)
     localidad  = models.CharField(max_length=255, blank=True)
     monto = models.FloatField()
     inegi_localidad = models.CharField(max_length=255, blank=True)
     inegi_municipio = models.CharField(max_length=255, blank=True)
-    llave_unica = models.CharField(max_length=255)
-    sexo = models.CharField(max_length=255)
-    actividad_productiva = models.CharField(max_length=255)
-    programa = models.CharField(max_length=255)
-    componente = models.CharField(max_length=255)
+    llave_unica = models.CharField(max_length=255, blank=True)
+    sexo = models.CharField(max_length=255, blank=True)
+    actividad_productiva = models.CharField(max_length=255, blank=True)
+    programa = models.CharField(max_length=255, blank=True)
+    componente = models.CharField(max_length=255, blank=True)
+    npa_emb = models.CharField(max_length=255, blank=True)
+    folio = models.CharField(max_length=255, blank=True)
+    suma_litros_asignados = models.IntegerField(blank=True, null=True, default=None)
+
+    class Meta:
+        abstract = True
 
 
+class BeneficiariosDiesel(BeneficiarioBase):
+    pass
 
-class BeneficiariosGasolina(models.Model):
-    ano = models.CharField(max_length=255, blank=True)
-    beneficiario = models.CharField(max_length=255, blank=True)
-    rfc = models.CharField(max_length=255, blank=True)
-    rnpa = models.CharField(max_length=255, blank=True)
-    estado  = models.CharField(max_length=255, blank=True)
-    municipio  = models.CharField(max_length=255, blank=True)
-    localidad  = models.CharField(max_length=255, blank=True)
-    monto = models.FloatField()
-    inegi_localidad = models.CharField(max_length=255, blank=True)
-    inegi_municipio = models.CharField(max_length=255, blank=True)
+
+class BeneficiariosGasolina(BeneficiarioBase):
+    pass
+    
 

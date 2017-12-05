@@ -1,9 +1,11 @@
 from django.core.management.base import BaseCommand, CommandError
-from api.csv_loader import InegiLoader
+from api.csv_loader import InegiLoader, BeneficiarioDieselLoader
 import csv
 
 LOADERS = {
-    'inegi': InegiLoader
+    'inegi': InegiLoader,
+    'diesel': BeneficiarioDieselLoader,
+
 }
 
 class Command(BaseCommand):

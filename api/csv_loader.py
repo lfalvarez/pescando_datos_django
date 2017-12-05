@@ -40,10 +40,17 @@ class CSVLoaderBase:
         return result
 
     def process(self):
+        errors = []
+        line_counter = 0
         for line in self.lines:
             instance = self.model(**(self.get_attrs_dict(line)))
-            instance.save()
-
+            try:
+                instance.save()
+            except Exception as e:
+                errors.append("Error con la línea " + str(line_counter) + " el error es "+ str(e))
+            line_counter += 1
+        if errors:
+            print(errors)
 
 class BeneficiarioDieselLoader(CSVLoaderBase):
 
@@ -55,6 +62,17 @@ class BeneficiarioDieselLoader(CSVLoaderBase):
             'cod_inegi_localidad':  "inegi_localidad",
         }
 
+class BeneficiarioGasolinaLoader(CSVLoaderBase):
+    def __init__(self):
+        super().__init__()
+        self.model = BeneficiariosGasolina
+        self.overriden_headers = {
+            'cod_inegi_municipio' : 'inegi_municipio',
+            'cod_inegi_localidad':  "inegi_localidad",
+            "Número de RNP_EMB por RNPA": 'npa_emb',
+            'clave_uni': 'llave_unica',
+            'Suma de Litros Asignados': 'suma_litros_asignados'
+        }
 
 class InegiLoader(CSVLoaderBase):
     def __init__(self):
@@ -65,3 +83,4 @@ class InegiLoader(CSVLoaderBase):
             'COD_INEGI_LOCALIDAD':  "inegi_localidad",
             'NOM_ABR': 'estado_abreviado'
         }
+

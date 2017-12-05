@@ -32,3 +32,7 @@ class BeneficiarioDieselLoaderCsvLoaders(TestCase):
         self.assertEquals(headers["actividad_productiva"], 13)
         self.assertEquals(headers["programa"], 14)
         self.assertEquals(headers["componente"], 15)
+
+    def test_command_line_loader(self):
+        call_command("load_csv", 'diesel', 'api/tests/csv_fixtures/beneficiarios_diesel.csv')
+        self.assertTrue(BeneficiariosDiesel.objects.exists())

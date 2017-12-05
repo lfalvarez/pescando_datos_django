@@ -1,3 +1,4 @@
 Django==2.0.0
 celery
 django-test-without-migrations==0.6
+django-nose

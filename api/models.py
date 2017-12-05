@@ -116,6 +116,13 @@ class BeneficiariosDiesel(models.Model):
     monto = models.FloatField()
     inegi_localidad = models.CharField(max_length=255, blank=True)
     inegi_municipio = models.CharField(max_length=255, blank=True)
+    llave_unica = models.CharField(max_length=255)
+    sexo = models.CharField(max_length=255)
+    actividad_productiva = models.CharField(max_length=255)
+    programa = models.CharField(max_length=255)
+    componente = models.CharField(max_length=255)
+
+
 
 class BeneficiariosGasolina(models.Model):
     ano = models.CharField(max_length=255, blank=True)
